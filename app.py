@@ -165,6 +165,26 @@ if "vector" not in st.session_state:
 st.title("Hana (Mental Health Assistant)")
 
 
+with st.chat_message("user"):
+    st.write("Hello👋 How can Assist you!")
+
+
+
+sidebar_logo = "8d33d83eac1cf8e3ea1b4840ccc8baef-removebg-preview.png"
+
+
+
+
+
+
+st.logo(sidebar_logo,link=None, icon_image=None)
+
+
+# "with" notation
+with st.sidebar:
+    st.title("Prompts")
+    st.markdown("Talk to the chatbot!")
+    
 
 llm = ChatGroq(
     api_key = st.secrets["GROQ_API_KEY"],
@@ -190,7 +210,7 @@ document_chain = create_stuff_documents_chain(llm, prompt)
 retriever = st.session_state.vector.as_retriever()
 retrieval_chain = create_retrieval_chain(retriever, document_chain)
 
-prompt = st.text_input("Input your prompt here")
+prompt = st.chat_input("Input your prompt here")
 
 
 # If the user hits enter
@@ -204,11 +224,11 @@ if prompt:
 
     st.write(response["answer"])
 
-    # With a streamlit expander
-    with st.expander("Document Similarity Search"):
-        # Find the relevant chunks
-        for i, doc in enumerate(response["context"]):
-            # print(doc)
-            # # st.write(f"Source Document # {i+1} : {doc.metadata['source'].split('/')[-1]}")
-            st.write(doc.page_content)
-            st.write("--------------------------------")
+    # # With a streamlit expander
+    # with st.expander("Document Similarity Search"):
+    #     # Find the relevant chunks
+    #     for i, doc in enumerate(response["context"]):
+    #         # print(doc)
+    #         # # st.write(f"Source Document # {i+1} : {doc.metadata['source'].split('/')[-1]}")
+    #         st.write(doc.page_content)
+    #         st.write("--------------------------------")
