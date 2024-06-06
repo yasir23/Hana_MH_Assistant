@@ -1,0 +1,9 @@
+streamlit
+langchain
+langchain-groq
+faiss-cpu
+unstructured
+langchain_community
+fastembed
+tqdm
+markdown
